@@ -4,6 +4,8 @@ const { graphqlHTTP} = require('express-graphql')
 const axios = require('axios')
 const app = expresss()
 
+let message = "This is a message";
+
 const schema = buildSchema(`
 
 type Post {
@@ -25,7 +27,13 @@ type User {
      getUser: User
      getUsers: [User]
      getPostFromExternalAPI:[Post]
+     message: String
  }
+
+type Mutation {
+  setMessage(newMessage: String): String
+}
+
 `)
 
 
@@ -70,7 +78,14 @@ const root = {
       const result = await axios.get('https://jsonplaceholder.typicode.com/posts');
       return result.data
   // return axios.get('https://jsonplaceholder.typicode.com/posts').then(result => result.data);
-  }
+  },
+
+  setMessage:({newMessage})=>{
+      message= newMessage
+      return message
+  },
+
+  message:()=> message,
 }
 
 
