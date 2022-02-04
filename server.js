@@ -6,8 +6,8 @@ const app = expresss()
 
 const schema = buildSchema(`
  type Query {
-     hello: String
-     welcomMessage(name: String): String
+     hello: String!
+     welcomMessage(name: String, dayOfWeek: String!): String
  }
 `)
 
@@ -17,7 +17,7 @@ const root = {
   },
   welcomMessage:(args)=>{
       console.log(args);
-      return `Hey ${args.name}, Hows life`
+      return `Hey ${args.name}, Hows life, Today is ${args.dayOfWeek}`
   }
 }
 
