@@ -5,11 +5,22 @@ const { graphqlHTTP} = require('express-graphql')
 const app = expresss()
 
 const schema = buildSchema(`
+
+type User {
+    name: String
+    age: Int
+    college: String
+},
+
  type Query {
      hello: String!
      welcomMessage(name: String, dayOfWeek: String!): String
+     getUser: User
  }
 `)
+
+
+
 
 const root = {
   hello:()=>{
@@ -18,7 +29,16 @@ const root = {
   welcomMessage:(args)=>{
       console.log(args);
       return `Hey ${args.name}, Hows life, Today is ${args.dayOfWeek}`
-  }
+  },
+
+  getUser: ()=>{
+    const user = {
+        name: 'Nirodha',
+        age:25,
+        college:'Harishchandra',
+    };
+    return user
+  },
 }
 
 
