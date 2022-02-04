@@ -30,14 +30,20 @@ type User {
      message: String
  }
 
+ input UserInput {
+     name: String!
+     age : Int!
+     college: String!
+ }
+
 type Mutation {
   setMessage(newMessage: String): String
-  createUser(name: String!, age: Int!, college: String!) : User
+  createUser(user: UserInput) : User
 }
 
 `)
 
-
+//createUser(name: String!, age: Int!, college: String!) : User
 
 
 const root = {
@@ -88,10 +94,11 @@ const root = {
 
   message:()=> message,
 
-  createUser:({name,age,college})=>{
+  createUser:(args)=>{
+      console.log(args)
     //Create a new user inside db on external api on even firestone 
-
-    return {name, age,college};
+    //You can validate User Here
+    return args.user;
   },
 }
 
