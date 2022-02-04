@@ -32,6 +32,7 @@ type User {
 
 type Mutation {
   setMessage(newMessage: String): String
+  createUser(name: String!, age: Int!, college: String!) : User
 }
 
 `)
@@ -86,6 +87,12 @@ const root = {
   },
 
   message:()=> message,
+
+  createUser:({name,age,college})=>{
+    //Create a new user inside db on external api on even firestone 
+
+    return {name, age,college};
+  },
 }
 
 
