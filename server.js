@@ -1,10 +1,17 @@
 const expresss = require('express')
 const { buildSchema} = require('graphql')
 const { graphqlHTTP} = require('express-graphql')
-
+const axios = require('axios')
 const app = expresss()
 
 const schema = buildSchema(`
+
+type Post {
+    userId: Int
+    id:Int
+    title: String
+    body: String
+}
 
 type User {
     name: String
@@ -17,6 +24,7 @@ type User {
      welcomMessage(name: String, dayOfWeek: String!): String
      getUser: User
      getUsers: [User]
+     getPostFromExternalAPI:[Post]
  }
 `)
 
@@ -57,6 +65,10 @@ const root = {
 
     return users
   },
+
+  getPostFromExternalAPI: ()=>{
+   return axios.get('https://jsonplaceholder.typicode.com/posts').then(result => result.data);
+  }
 }
 
 
