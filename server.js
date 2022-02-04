@@ -66,8 +66,10 @@ const root = {
     return users
   },
 
-  getPostFromExternalAPI: ()=>{
-   return axios.get('https://jsonplaceholder.typicode.com/posts').then(result => result.data);
+  getPostFromExternalAPI: async ()=>{
+      const result = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      return result.data
+  // return axios.get('https://jsonplaceholder.typicode.com/posts').then(result => result.data);
   }
 }
 
