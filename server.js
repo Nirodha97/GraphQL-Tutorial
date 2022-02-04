@@ -16,6 +16,7 @@ type User {
      hello: String!
      welcomMessage(name: String, dayOfWeek: String!): String
      getUser: User
+     getUsers: [User]
  }
 `)
 
@@ -38,6 +39,23 @@ const root = {
         college:'Harishchandra',
     };
     return user
+  },
+
+  getUsers:()=>{
+    const users = [
+        {
+            name: 'Nirodha',
+            age:25,
+            college:'Harishchandra',
+        },
+        {
+            name: 'Nimashi',
+            age:25,
+            college:'Kandy',
+        },    
+    ];
+
+    return users
   },
 }
 
